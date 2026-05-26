@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lisa Freefeather — Competitive Research Hub</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Georgia, 'Times New Roman', serif; background: #0d0d0d; color: #e8e0d4; min-height: 100vh; }
+  a { color: #c9a96e; }
+
+  .header { border-bottom: 1px solid #2a2a2a; padding: 36px 48px 28px; background: linear-gradient(180deg, #111 0%, #0d0d0d 100%); }
+  .header-eyebrow { font-size: 10px; letter-spacing: 4px; color: #8a7a6a; text-transform: uppercase; margin-bottom: 10px; }
+  .header-title { font-size: 28px; font-weight: 400; margin: 0 0 6px; letter-spacing: 0.5px; color: #f0e8dc; }
+  .header-sub { font-size: 13px; color: #5a5040; letter-spacing: 1px; }
+  .header-sub2 { font-size: 11px; color: #3a3028; margin-top: 4px; letter-spacing: 1px; }
+
+  .nav { display: flex; border-bottom: 1px solid #1e1e1e; padding: 0 48px; background: #0d0d0d; overflow-x: auto; }
+  .nav-btn { background: none; border: none; border-bottom: 2px solid transparent; color: #5a5040; padding: 16px 24px; cursor: pointer; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; font-family: Georgia, serif; white-space: nowrap; transition: color 0.2s; }
+  .nav-btn.active { border-bottom-color: #c9a96e; color: #c9a96e; }
+
+  .content { padding: 40px 48px; max-width: 1100px; }
+
+  .intro-text { font-size: 14px; color: #7a6a58; line-height: 1.8; max-width: 680px; margin-bottom: 32px; }
+
+  /* Cards */
+  .card { border: 1px solid #1e1e1e; margin-bottom: 16px; background: #0a0a0a; transition: background 0.2s; }
+  .card.open { background: #111; }
+  .card-header { padding: 20px 24px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; }
+  .card-left { display: flex; align-items: center; gap: 20px; }
+  .tier-badge { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; padding: 3px 10px; border: 1px solid #3a3028; color: #5a5040; white-space: nowrap; }
+  .tier-badge.close { border-color: #c9a96e; color: #c9a96e; }
+  .card-name { font-size: 16px; color: #e8e0d4; }
+  .card-niche { font-size: 11px; color: #5a5040; margin-top: 2px; letter-spacing: 1px; }
+  .card-right { display: flex; gap: 32px; align-items: center; }
+  .subs-count { font-size: 18px; color: #c9a96e; }
+  .subs-label { font-size: 10px; color: #3a3028; letter-spacing: 1px; }
+  .toggle-icon { color: #3a3028; font-size: 18px; }
+  .card-body { padding: 0 24px 24px; border-top: 1px solid #1a1a1a; display: none; }
+  .card-body.open { display: block; }
+  .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 20px; }
+  .field-label { font-size: 10px; letter-spacing: 2px; color: #5a5040; text-transform: uppercase; margin-bottom: 10px; }
+  .pillar-item { font-size: 13px; color: #9a8a78; padding: 4px 0; border-bottom: 1px solid #1a1a1a; }
+  .field-text { font-size: 13px; color: #9a8a78; line-height: 1.7; }
+  .gap-box { margin-top: 20px; padding: 16px; background: #0d0d0d; border: 1px solid rgba(201,169,110,0.13); }
+  .gap-label { font-size: 10px; letter-spacing: 2px; color: #c9a96e; text-transform: uppercase; margin-bottom: 8px; }
+  .gap-text { font-size: 13px; color: #b8a890; line-height: 1.7; }
+
+  /* Themes */
+  .theme-card { margin-bottom: 20px; border: 1px solid #1e1e1e; padding: 24px; }
+  .theme-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; }
+  .theme-name { font-size: 16px; color: #e8e0d4; }
+  .sat-badge { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; padding: 3px 10px; white-space: nowrap; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .opp-box { padding: 12px; background: #111; border: 1px solid rgba(201,169,110,0.13); }
+  .opp-label { font-size: 10px; letter-spacing: 2px; color: #c9a96e; text-transform: uppercase; margin-bottom: 6px; }
+  .opp-text { font-size: 13px; color: #b8a890; line-height: 1.6; }
+
+  /* Comments */
+  .comment-card { margin-bottom: 20px; border: 1px solid #1e1e1e; }
+  .comment-source { padding: 14px 24px; background: #0a0a0a; border-bottom: 1px solid #1e1e1e; font-size: 10px; letter-spacing: 2px; color: #5a5040; text-transform: uppercase; }
+  .comment-body { padding: 20px 24px; }
+  .comment-quote { font-size: 18px; color: #c9a96e; font-style: italic; margin-bottom: 12px; line-height: 1.5; }
+  .signal-row { display: flex; gap: 8px; align-items: flex-start; }
+  .signal-label { font-size: 10px; letter-spacing: 2px; color: #c9a96e; text-transform: uppercase; white-space: nowrap; padding-top: 2px; }
+  .signal-text { font-size: 13px; color: #9a8a78; line-height: 1.7; }
+
+  /* Tracker */
+  .tracker-form { border: 1px solid #2a2a2a; padding: 28px; margin-bottom: 40px; background: #0a0a0a; }
+  .form-title { font-size: 10px; letter-spacing: 3px; color: #c9a96e; text-transform: uppercase; margin-bottom: 24px; }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .form-field { margin-bottom: 16px; }
+  .form-label { font-size: 10px; letter-spacing: 2px; color: #5a5040; text-transform: uppercase; margin-bottom: 6px; display: block; }
+  .form-input, .form-textarea { width: 100%; background: #111; border: 1px solid #2a2a2a; color: #e8e0d4; padding: 10px 12px; font-size: 13px; font-family: Georgia, serif; outline: none; }
+  .form-textarea { resize: vertical; }
+  .form-btn { background: none; border: 1px solid #c9a96e; color: #c9a96e; padding: 10px 28px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; font-family: Georgia, serif; margin-top: 8px; }
+  .form-btn:hover { background: rgba(201,169,110,0.08); }
+  .log-empty { text-align: center; padding: 60px 0; color: #3a3028; font-size: 13px; letter-spacing: 1px; }
+  .log-entry { border: 1px solid #1e1e1e; margin-bottom: 16px; padding: 20px 24px; }
+  .log-header { display: flex; justify-content: space-between; margin-bottom: 12px; }
+  .log-title { font-size: 14px; color: #e8e0d4; }
+  .log-channel { font-size: 11px; color: #5a5040; margin-left: 12px; }
+  .log-meta { font-size: 11px; color: #3a3028; }
+  .log-section-label { font-size: 10px; letter-spacing: 2px; color: #5a5040; text-transform: uppercase; margin-bottom: 4px; }
+  .log-section-label.gold { color: #c9a96e; }
+  .log-section-text { font-size: 13px; color: #9a8a78; font-style: italic; line-height: 1.6; margin-bottom: 10px; }
+  .log-section-text.light { color: #b8a890; font-style: normal; }
+
+  /* Tools */
+  .tool-card { margin-bottom: 24px; border: 1px solid #1e1e1e; }
+  .tool-header { padding: 18px 24px; background: #0a0a0a; border-bottom: 1px solid #1e1e1e; display: flex; justify-content: space-between; align-items: center; }
+  .tool-name { font-size: 16px; color: #e8e0d4; }
+  .tool-type { font-size: 11px; color: #5a5040; margin-left: 14px; letter-spacing: 1px; }
+  .tool-badge { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; padding: 3px 10px; }
+  .tool-badge.primary { border: 1px solid #c9a96e; color: #c9a96e; }
+  .tool-badge.secondary { border: 1px solid #3a3028; color: #5a5040; }
+  .tool-body { padding: 20px 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .why-box { padding: 14px; background: #111; border: 1px solid rgba(201,169,110,0.13); margin-bottom: 14px; }
+  .why-label { font-size: 10px; letter-spacing: 2px; color: #c9a96e; text-transform: uppercase; margin-bottom: 6px; }
+  .why-text { font-size: 13px; color: #b8a890; line-height: 1.7; }
+  .workflow-box { padding: 14px; background: #0a0a0a; border: 1px solid #2a2a2a; }
+  .workflow-label { font-size: 10px; letter-spacing: 2px; color: #5a5040; text-transform: uppercase; margin-bottom: 6px; }
+  .workflow-text { font-size: 13px; color: #9a8a78; line-height: 1.7; }
+  .tool-link { display: inline-block; margin-top: 12px; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #c9a96e; text-decoration: none; border-bottom: 1px solid rgba(201,169,110,0.27); padding-bottom: 2px; }
+
+  .note-box { margin-top: 24px; padding: 16px 20px; border: 1px dashed #2a2a2a; font-size: 12px; color: #3a3028; line-height: 1.7; }
+
+  @media (max-width: 700px) {
+    .header { padding: 24px 20px 18px; }
+    .content { padding: 24px 20px; }
+    .nav { padding: 0 8px; }
+    .card-grid, .two-col, .tool-body { grid-template-columns: 1fr; }
+    .form-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-eyebrow">Lisa Freefeather — Competitive Intelligence</div>
+  <h1 class="header-title">Adjacent Niche Research Hub</h1>
+  <div class="header-sub">Niches: Women's Self-Leadership · Life Design · Feminine Spirituality · Archetypes · Manifestation Inner Work</div>
+  <div class="header-sub2">Biweekly cadence · 6-month project · Wave 1 initialized May 2026</div>
+</div>
+
+<nav class="nav">
+  <button class="nav-btn active" onclick="showTab('landscape', this)">Channel Landscape</button>
+  <button class="nav-btn" onclick="showTab('themes', this)">Content Themes</button>
+  <button class="nav-btn" onclick="showTab('comments', this)">Comment Patterns</button>
+  <button class="nav-btn" onclick="showTab('tracker', this)">Biweekly Log</button>
+  <button class="nav-btn" onclick="showTab('tools', this)">Research Tools</button>
+</nav>
+
+<div class="content">
+
+  <!-- LANDSCAPE -->
+  <div id="tab-landscape" class="tab">
+    <p class="intro-text">Five channels mapped in Wave 1. Tier labels indicate proximity to Lala's positioning. Expand each channel to see the identified gap — where their audience is left hungry.</p>
+
+    <div class="card" id="ch1">
+      <div class="card-header" onclick="toggleCard('ch1')">
+        <div class="card-left">
+          <span class="tier-badge">Adjacent</span>
+          <div><div class="card-name">Erin Lyons TV</div><div class="card-niche">Quantum Manifestation / Channeling</div></div>
+        </div>
+        <div class="card-right">
+          <div><div class="subs-count">70K</div><div class="subs-label">SUBSCRIBERS</div></div>
+          <span class="toggle-icon">+</span>
+        </div>
+      </div>
+      <div class="card-body" id="ch1-body">
+        <div class="card-grid">
+          <div>
+            <div class="field-label">Content Pillars</div>
+            <div class="pillar-item">— Timeline collapse</div>
+            <div class="pillar-item">— Channeled messages</div>
+            <div class="pillar-item">— Quantum identity</div>
+            <div class="pillar-item">— Sacred wealth</div>
+            <div class="field-label" style="margin-top:16px;">Tone</div>
+            <div class="field-text">Mystical, other-realm, high-frequency</div>
+          </div>
+          <div>
+            <div class="field-label">Audience</div>
+            <div class="field-text">Awakening souls, new earth leaders, spiritually curious women</div>
+          </div>
+        </div>
+        <div class="gap-box"><div class="gap-label">Identified Gap</div><div class="gap-text">Very cosmic / channeled — no grounded practical bridge for self-leadership. Comments likely hungry for "how do I actually apply this."</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="ch2">
+      <div class="card-header" onclick="toggleCard('ch2')">
+        <div class="card-left">
+          <span class="tier-badge close">Very Close</span>
+          <div><div class="card-name">Y.O.U — Your Own Universe</div><div class="card-niche">Consciousness / Shadow Work / Accountability — Shorts Only</div></div>
+        </div>
+        <div class="card-right">
+          <div><div class="subs-count">—</div><div class="subs-label">SHORTS CHANNEL</div></div>
+          <span class="toggle-icon">+</span>
+        </div>
+      </div>
+      <div class="card-body" id="ch2-body">
+        <div class="card-grid">
+          <div>
+            <div class="field-label">Content Pillars</div>
+            <div class="pillar-item">— Shadow work</div>
+            <div class="pillar-item">— Emotional intelligence</div>
+            <div class="pillar-item">— Energetic mastery</div>
+            <div class="pillar-item">— Consciousness</div>
+            <div class="field-label" style="margin-top:16px;">Tone</div>
+            <div class="field-text">Truth-telling, grounded, no-spiritual-bypass</div>
+          </div>
+          <div>
+            <div class="field-label">Audience</div>
+            <div class="field-text">Women seeking spiritual truth with accountability and real-life grounding</div>
+            <div class="field-label" style="margin-top:16px;">Format Note</div>
+            <div class="field-text">Confirmed Shorts-only. No long-form video library. Run by Yaya (@Yayas_world777). This topic territory has strong demand and no long-form competition.</div>
+          </div>
+        </div>
+        <div class="gap-box"><div class="gap-label">Identified Gap</div><div class="gap-text">Accountability + spirituality is strong but delivered in 60-second clips. No one is going deep on this in long form. The feminine archetype / ancestral remembrance layer is entirely absent. Wide open lane.</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="ch3">
+      <div class="card-header" onclick="toggleCard('ch3')">
+        <div class="card-left">
+          <span class="tier-badge">Adjacent</span>
+          <div><div class="card-name">The Feminine Universe</div><div class="card-niche">Enhanced Feminine Lifestyle / Strategy</div></div>
+        </div>
+        <div class="card-right">
+          <div><div class="subs-count">319K</div><div class="subs-label">SUBSCRIBERS</div></div>
+          <span class="toggle-icon">+</span>
+        </div>
+      </div>
+      <div class="card-body" id="ch3-body">
+        <div class="card-grid">
+          <div>
+            <div class="field-label">Content Pillars</div>
+            <div class="pillar-item">— Feminine strategy / tactics</div>
+            <div class="pillar-item">— How to reinvent yourself</div>
+            <div class="pillar-item">— Self-improvement (steps-based)</div>
+            <div class="pillar-item">— Raising your standards / price</div>
+            <div class="field-label" style="margin-top:16px;">Tone</div>
+            <div class="field-text">Warm, practical, aspirational lifestyle</div>
+          </div>
+          <div>
+            <div class="field-label">Audience</div>
+            <div class="field-text">Women seeking enhanced femininity and practical strategy. 319K subs, 16M views, avg video 17 min, posts 0.5x/week — strong evergreen signal.</div>
+          </div>
+        </div>
+        <div class="gap-box"><div class="gap-label">Identified Gap</div><div class="gap-text">Strategy without soul depth. Coaching behavior, not identity. No content on why women keep underselling themselves despite knowing better. High audience volume confirms demand — the depth is missing.</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="ch4">
+      <div class="card-header" onclick="toggleCard('ch4')">
+        <div class="card-left">
+          <span class="tier-badge">Adjacent</span>
+          <div><div class="card-name">The Universe Guru (Mina Irfan)</div><div class="card-niche">Self-Actualization / Feminine Energy Inner Work</div></div>
+        </div>
+        <div class="card-right">
+          <div><div class="subs-count">140K+</div><div class="subs-label">SUBSCRIBERS</div></div>
+          <span class="toggle-icon">+</span>
+        </div>
+      </div>
+      <div class="card-body" id="ch4-body">
+        <div class="card-grid">
+          <div>
+            <div class="field-label">Content Pillars</div>
+            <div class="pillar-item">— Feminine energy stages</div>
+            <div class="pillar-item">— Self-actualization</div>
+            <div class="pillar-item">— Evolutionary psychology</div>
+            <div class="pillar-item">— Inner work</div>
+            <div class="field-label" style="margin-top:16px;">Tone</div>
+            <div class="field-text">Authoritative, feminine, direct</div>
+          </div>
+          <div>
+            <div class="field-label">Audience</div>
+            <div class="field-text">Women seeking powerful life upgrades through inner work</div>
+          </div>
+        </div>
+        <div class="gap-box"><div class="gap-label">Identified Gap</div><div class="gap-text">Strong on feminine energy theory. Less on ancestral / ritual / initiatory dimensions. Watch for comments where women want more depth on identity vs. behavior.</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="ch5">
+      <div class="card-header" onclick="toggleCard('ch5')">
+        <div class="card-left">
+          <span class="tier-badge">Adjacent</span>
+          <div><div class="card-name">Manifestation Babe (Kathrin Zenkina)</div><div class="card-niche">Manifestation / Spiritual Mindset</div></div>
+        </div>
+        <div class="card-right">
+          <div><div class="subs-count">30K</div><div class="subs-label">SUBSCRIBERS</div></div>
+          <span class="toggle-icon">+</span>
+        </div>
+      </div>
+      <div class="card-body" id="ch5-body">
+        <div class="card-grid">
+          <div>
+            <div class="field-label">Content Pillars</div>
+            <div class="pillar-item">— Law of attraction</div>
+            <div class="pillar-item">— Money mindset</div>
+            <div class="pillar-item">— Manifestation techniques</div>
+            <div class="pillar-item">— Spiritual growth</div>
+            <div class="field-label" style="margin-top:16px;">Tone</div>
+            <div class="field-text">Energetic, empowering, technique-focused</div>
+          </div>
+          <div>
+            <div class="field-label">Audience</div>
+            <div class="field-text">Women breaking through limitations to manifest bigger lives</div>
+          </div>
+        </div>
+        <div class="gap-box"><div class="gap-label">Identified Gap</div><div class="gap-text">Technique-heavy. Less on the why beneath the pattern — nervous system, identity, ancestral. Watch for women stuck in the loop of trying and not arriving.</div></div>
+      </div>
+    </div>
+
+    <div class="note-box">Add new channels as they surface via the biweekly log. This landscape is a living document.</div>
+  </div>
+
+  <!-- THEMES -->
+  <div id="tab-themes" class="tab" style="display:none;">
+    <p class="intro-text">Content themes ranked by saturation across the adjacent niche. Low saturation + high demand = Lala's highest-leverage territory.</p>
+
+    <script>
+    var themes = [
+      { theme: "Quantum / Timeline Collapse Language", sat: "High", satColor: "#e67e22", sentiment: "Mixed — resonates but also creates confusion and spiritual bypass", opp: "Translate the concept into grounded identity and decision-making language women can actually use" },
+      { theme: "Shadow Work 101", sat: "Very High", satColor: "#c0392b", sentiment: "Strong demand, lots of surface-level content", opp: "Go deeper — shadow work as a business and creative strategy for founders, not just healing" },
+      { theme: "Feminine Energy / Archetypes", sat: "High", satColor: "#e67e22", sentiment: "Lifestyle-level saturation. Archetypal depth is underserved.", opp: "Mythic / initiatory framing of archetypes (Inanna, Atropos, Lilith) is wide open and distinct" },
+      { theme: "Manifestation Techniques", sat: "Extremely High", satColor: "#922b21", sentiment: "Audience fatigue visible in comments — 'I've tried everything'", opp: "Reframe manifestation as identity alignment and decision authority, not technique" },
+      { theme: "Women + Self-Worth + Overthinking", sat: "Moderate", satColor: "#f1c40f", sentiment: "High emotional resonance. Evergreen demand.", opp: "Deep content that names the specific pattern of high-achieving women who still defer to external validation — underserved and precise" },
+      { theme: "Practical Life Design for Women", sat: "Low-Moderate", satColor: "#27ae60", sentiment: "Strong desire. Few channels bridge spiritual identity with practical decision design.", opp: "The Freefeather Framework is exactly this gap — no one is naming it cleanly" },
+      { theme: "Ancestral / Ritual / Initiatory Feminine", sat: "Very Low", satColor: "#1a5276", sentiment: "Hungry niche. Comments in adjacent content often ask 'where can I learn more about this?'", opp: "Myth & Mirror / Fates ecosystem is wide open. Biggest positioning whitespace." }
+    ];
+    document.addEventListener('DOMContentLoaded', function() {
+      var container = document.getElementById('themes-container');
+      themes.forEach(function(t) {
+        container.innerHTML += '<div class="theme-card">'
+          + '<div class="theme-header"><div class="theme-name">'+t.theme+'</div>'
+          + '<span class="sat-badge" style="background:'+t.satColor+'22;border:1px solid '+t.satColor+';color:'+t.satColor+'">'+t.sat+' Saturation</span></div>'
+          + '<div class="two-col">'
+          + '<div><div class="field-label">Comment Sentiment</div><div class="field-text">'+t.sentiment+'</div></div>'
+          + '<div class="opp-box"><div class="opp-label">Your Opportunity</div><div class="opp-text">'+t.opp+'</div></div>'
+          + '</div></div>';
+      });
+    });
+    </script>
+    <div id="themes-container"></div>
+  </div>
+
+  <!-- COMMENTS -->
+  <div id="tab-comments" class="tab" style="display:none;">
+    <p class="intro-text">Recurring comment patterns across the adjacent niche. These are the unanswered questions, the unmet needs, the exact phrases your audience is already saying.</p>
+
+    <div class="comment-card">
+      <div class="comment-source">Source: Manifestation channels (general)</div>
+      <div class="comment-body">
+        <div class="comment-quote">"I've done all the work and I'm still stuck"</div>
+        <div class="signal-row"><span class="signal-label">Signal →</span><span class="signal-text">Exhaustion with technique-only approaches. Hungry for identity-level shift.</span></div>
+      </div>
+    </div>
+    <div class="comment-card">
+      <div class="comment-source">Source: Feminine energy channels</div>
+      <div class="comment-body">
+        <div class="comment-quote">"But how do I actually apply this in real decisions?"</div>
+        <div class="signal-row"><span class="signal-label">Signal →</span><span class="signal-text">Practical bridge missing. Strategy without soul, or soul without strategy.</span></div>
+      </div>
+    </div>
+    <div class="comment-card">
+      <div class="comment-source">Source: Shadow work channels</div>
+      <div class="comment-body">
+        <div class="comment-quote">"This is the first time I've felt seen"</div>
+        <div class="signal-row"><span class="signal-label">Signal →</span><span class="signal-text">High resonance with naming the specific pattern — not generic struggle but precise emotional truth.</span></div>
+      </div>
+    </div>
+    <div class="comment-card">
+      <div class="comment-source">Source: Quantum / channeling channels</div>
+      <div class="comment-body">
+        <div class="comment-quote">"I love this but I don't know what to do with it"</div>
+        <div class="signal-row"><span class="signal-label">Signal →</span><span class="signal-text">Cosmic content without grounded application creates inspiration without movement.</span></div>
+      </div>
+    </div>
+    <div class="comment-card">
+      <div class="comment-source">Source: Self-leadership / coaching channels</div>
+      <div class="comment-body">
+        <div class="comment-quote">"Why does knowing better not make me do better?"</div>
+        <div class="signal-row"><span class="signal-label">Signal →</span><span class="signal-text">The gap between insight and action — exactly Lala's territory.</span></div>
+      </div>
+    </div>
+
+    <div class="note-box">As you watch videos biweekly, paste verbatim comments into the Biweekly Log. Over time, patterns will emerge that become direct video titles.</div>
+  </div>
+
+  <!-- TRACKER -->
+  <div id="tab-tracker" class="tab" style="display:none;">
+    <p class="intro-text">Log your biweekly research passes here. One entry per video you study. Over 6 months, this becomes the most valuable document in your content strategy.</p>
+
+    <div class="tracker-form">
+      <div class="form-title">New Research Entry</div>
+      <div class="form-grid">
+        <div><label class="form-label">Date</label><input class="form-input" id="f-date" type="date"></div>
+        <div><label class="form-label">Channel Name</label><input class="form-input" id="f-channel" placeholder="e.g. The Feminine Universe"></div>
+        <div><label class="form-label">Video Title</label><input class="form-input" id="f-title" placeholder="Exact title"></div>
+        <div><label class="form-label">View Count</label><input class="form-input" id="f-views" placeholder="e.g. 284K"></div>
+      </div>
+      <div class="form-field"><label class="form-label">Top Comments (paste exact phrases)</label><textarea class="form-textarea" id="f-comments" rows="3"></textarea></div>
+      <div class="form-field"><label class="form-label">Gaps / Opportunities Noted</label><textarea class="form-textarea" id="f-gaps" rows="3"></textarea></div>
+      <button class="form-btn" onclick="addEntry()">Log Entry</button>
+    </div>
+
+    <div id="log-container">
+      <div class="log-empty" id="log-empty">No entries yet. Your first research pass will seed this log.</div>
+    </div>
+  </div>
+
+  <!-- TOOLS -->
+  <div id="tab-tools" class="tab" style="display:none;">
+    <p class="intro-text">Tools for running this research without a paid subscription. Each one serves a specific function in the biweekly workflow.</p>
+
+    <div class="tool-card">
+      <div class="tool-header">
+        <div><span class="tool-name">VidIQ Chrome Extension</span><span class="tool-type">Free Browser Extension</span></div>
+        <span class="tool-badge primary">Primary Tool — Install First</span>
+      </div>
+      <div class="tool-body">
+        <div>
+          <div class="field-label">What It Does</div>
+          <div class="field-text" style="margin-bottom:16px;">Overlays real-time view counts, subscriber stats, engagement rates, and keyword scores directly on YouTube channel pages and video listings as you browse. No manual lookups needed.</div>
+          <div class="field-label">How to Use It</div>
+          <div class="field-text">Install the extension, then navigate to any channel (Feminine Universe, Erin Lyons TV, etc.) and sort by Most Popular. View counts and engagement data appear inline on every video thumbnail.</div>
+        </div>
+        <div>
+          <div class="why-box"><div class="why-label">Why It Matters</div><div class="why-text">This is the tool that solves the problem of not being able to see top video performance without paid access. Free tier gives you enough for this research cadence.</div></div>
+          <div class="workflow-box"><div class="workflow-label">Biweekly Workflow</div><div class="workflow-text">Browse channel → sort by Most Popular → log the top 5 videos with view counts into the Biweekly Log tab.</div></div>
+          <a href="https://vidiq.com/extension/" target="_blank" class="tool-link">Open Tool →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-header">
+        <div><span class="tool-name">YouTube Studio</span><span class="tool-type">Free — Built In</span></div>
+        <span class="tool-badge secondary">Benchmark Your Own Content</span>
+      </div>
+      <div class="tool-body">
+        <div>
+          <div class="field-label">What It Does</div>
+          <div class="field-text" style="margin-bottom:16px;">Access your own video analytics — impressions, click-through rate, average view duration, and audience retention curves. Lets you compare your content's performance against adjacent channels.</div>
+          <div class="field-label">How to Use It</div>
+          <div class="field-text">Check after every video posts. Look at the retention curve to see exactly where viewers drop off. Cross-reference with what adjacent channels are doing on the same topic.</div>
+        </div>
+        <div>
+          <div class="why-box"><div class="why-label">Why It Matters</div><div class="why-text">Most creators check views but ignore the retention curve. That curve tells you which section of your script needs work — and which sections are your strongest.</div></div>
+          <div class="workflow-box"><div class="workflow-label">Biweekly Workflow</div><div class="workflow-text">After each research pass, pull your top 3 videos by watch time and note what topics and structures they share. That's your signal for what to produce more of.</div></div>
+          <a href="https://studio.youtube.com" target="_blank" class="tool-link">Open Tool →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-header">
+        <div><span class="tool-name">YouTube Search — Incognito Mode</span><span class="tool-type">Free — No Account Needed</span></div>
+        <span class="tool-badge secondary">Keyword &amp; Title Research</span>
+      </div>
+      <div class="tool-body">
+        <div>
+          <div class="field-label">What It Does</div>
+          <div class="field-text" style="margin-bottom:16px;">Search YouTube in an incognito window to see unbiased autocomplete suggestions — what the algorithm surfaces to a cold viewer, not someone already in your orbit.</div>
+          <div class="field-label">How to Use It</div>
+          <div class="field-text">Type partial phrases your audience would search: "why do smart women," "women who overthink," "feminine energy and," "self-worth and." Screenshot the autocomplete. These are real search behaviors.</div>
+        </div>
+        <div>
+          <div class="why-box"><div class="why-label">Why It Matters</div><div class="why-text">Autocomplete is free keyword research. The phrases YouTube suggests are pulled from actual search volume. Any phrase that autocompletes is a topic with proven demand.</div></div>
+          <div class="workflow-box"><div class="workflow-label">Biweekly Workflow</div><div class="workflow-text">Run one incognito search pass per biweekly cycle. Choose 3 seed phrases relevant to your current content focus and log the autocomplete results.</div></div>
+          <a href="https://youtube.com" target="_blank" class="tool-link">Open Tool →</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="tool-card">
+      <div class="tool-header">
+        <div><span class="tool-name">Social Blade</span><span class="tool-type">Free Tier Available</span></div>
+        <span class="tool-badge secondary">Channel Growth Tracking</span>
+      </div>
+      <div class="tool-body">
+        <div>
+          <div class="field-label">What It Does</div>
+          <div class="field-text" style="margin-bottom:16px;">Tracks subscriber and view count growth over time for any YouTube channel. Shows trajectory — growing, plateauing, or declining — and surfaces historical upload patterns.</div>
+          <div class="field-label">How to Use It</div>
+          <div class="field-text">Search any adjacent channel by name. Free tier shows monthly subscriber and view trends. Look for channels growing despite low upload frequency — that signals evergreen content worth studying.</div>
+        </div>
+        <div>
+          <div class="why-box"><div class="why-label">Why It Matters</div><div class="why-text">A channel with 319K subscribers posting 0.5 videos/week and still gaining views (like The Feminine Universe) is producing evergreen content. That upload-to-view ratio tells you more than the sub count alone.</div></div>
+          <div class="workflow-box"><div class="workflow-label">Biweekly Workflow</div><div class="workflow-text">Check once per month, not every biweekly pass. Flag any adjacent channel showing accelerating growth and add them to the Channel Landscape tab.</div></div>
+          <a href="https://socialblade.com" target="_blank" class="tool-link">Open Tool →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function showTab(id, btn) {
+  document.querySelectorAll('.tab').forEach(function(t) { t.style.display = 'none'; });
+  document.querySelectorAll('.nav-btn').forEach(function(b) { b.classList.remove('active'); });
+  document.getElementById('tab-' + id).style.display = 'block';
+  btn.classList.add('active');
+}
+
+function toggleCard(id) {
+  var card = document.getElementById(id);
+  var body = document.getElementById(id + '-body');
+  var icon = card.querySelector('.toggle-icon');
+  var isOpen = card.classList.contains('open');
+  card.classList.toggle('open', !isOpen);
+  body.classList.toggle('open', !isOpen);
+  icon.textContent = isOpen ? '+' : '−';
+}
+
+var logEntries = [
+  {
+    id: 10,
+    date: "2026-05-26",
+    channel: "Erin Lyons TV",
+    title: "WAVE 1 — Top 15 Most Popular Videos (Full Channel Audit)",
+    views: "86.1K subs · +76,540 views last 7 days · est. $427/mo · 37 min avg · ~1 upload/week · Lead magnet: manifestation-archetype-quiz",
+    comments: "Pending — visit each top video, sort comments by Top, paste recurring phrases on next pass. Priority: #1 Angelic Channeling Heal Your Finances (129K) and #9 Shift from Chasing to Attracting (46K).",
+    gaps: "Money + cosmic channeling is her entire top 10. Every video is angelic realm, quantum jumping, timeline collapse, or abundance attraction. Zero grounded application, zero identity work, zero ancestral or lineage layer. Her archetype quiz as lead magnet shows she knows archetypes resonate — but she is not going deep with them. Audience receives cosmic transmissions with nowhere to land them. Comments likely full of 'how do I use this in real life.' Her top video (129K) is nearly double her #2 — channeling finances through angels is her clearest demand signal. This is Lala's territory minus the grounding, the lineage work, and the initiatory container."
+  },
+  {
+    id: 11,
+    date: "2026-05-26",
+    channel: "Erin Lyons TV",
+    title: "#1 — ANGELIC CHANNELING: HEAL YOUR FINANCES",
+    views: "129K",
+    comments: "Pending next pass.",
+    gaps: "Money healing through angelic channeling — her breakout video by a wide margin. Spiritual permission structure around finances. No identity excavation, no lineage work. Comments will likely show people wanting a practical bridge."
+  },
+  {
+    id: 12,
+    date: "2026-05-26",
+    channel: "Erin Lyons TV",
+    title: "#2 — HOW TO ACCESS HIGHER ABUNDANCE w/ the Angelic Realm",
+    views: "87K",
+    comments: "Pending next pass.",
+    gaps: "Abundance access through angelic realm. Same lane as #1. Money + cosmic framing dominates her two highest performers."
+  },
+  {
+    id: 13,
+    date: "2026-05-26",
+    channel: "Erin Lyons TV",
+    title: "#3 — TIMELINE CRYSTALLIZATION: Release Blockages and Upgrade Your Reality",
+    views: "66K",
+    comments: "Pending next pass.",
+    gaps: "Timeline work / blockage release. Closest to identity-level content but still fully cosmic. No ancestral framing, no body-level somatic work."
+  },
+  {
+    id: 14,
+    date: "2026-05-26",
+    channel: "Erin Lyons TV",
+    title: "#4 — Collapse Time and Jump Parallel Realities",
+    views: "58K",
+    comments: "Pending next pass.",
+    gaps: "Quantum jumping / parallel reality framing. High resonance with audience but zero practical bridge. 'I wish more people knew this' thumbnail text signals she knows the gap — but doesn't fill it."
+  },
+  {
+    id: 15,
+    date: "2026-05-26",
+    channel: "Erin Lyons TV",
+    title: "#5–15 — Light Language / Soul Blueprint / Spirit of Money / Abraham Hicks / Chasing to Attracting / Divine Mother Sophia / Quantum Jump / Divine Compensation / Kryon Channeling / Stop Repelling / Hard Work Does Not Equal Abundance",
+    views: "41K–54K each",
+    comments: "Pending next pass.",
+    gaps: "Consistent 40–55K range across all remaining top videos. Every single one is cosmic channeling, quantum framing, or abundance attraction with zero grounded identity work. 'You've Been Lied To: Hard Work Does Not Equal Abundance' (41K) is the one title closest to Lala's positioning — permission to stop striving — but stops at the cosmic level without going into ancestral programming or somatic pattern work."
+  },
+  {
+    id: 1,
+    date: "2026-05-26",
+    channel: "The Feminine Universe",
+    title: "WAVE 1 — Top 9 Most Popular Videos (Full Channel Audit)",
+    views: "323K subs · +43,188 views last 7 days · est. $607/mo · 19 min avg · ~1 upload/week",
+    comments: "Pending — install VidIQ, visit each top video, sort comments by Top, paste recurring phrases here on next pass.",
+    gaps: "Every top video is appearance, attractiveness, hygiene, or numbered tips. Zero content on identity, self-worth at root level, ancestral patterns, or why women stay stuck despite doing everything right. #1 video (2.7M views) is about looking pretty and polished. Their highest-performing inner-world-adjacent video — Reinvent Yourself (513K) — is still framed as 10 external steps. No soul depth anywhere in top 10. Their 323K audience is being served a surface-level feminine lifestyle with nowhere to go deeper. That woman is Lala's audience."
+  },
+  {
+    id: 2,
+    date: "2026-05-26",
+    channel: "The Feminine Universe",
+    title: "#1 — How to Always Look Pretty & Polished | Femininity & Appearance",
+    views: "2.7M",
+    comments: "Pending next pass.",
+    gaps: "Pure appearance content. Highest performing video on channel by a massive margin. Signals huge demand in this niche but zero overlap with Lala's territory — this audience wants a mirror, not a map."
+  },
+  {
+    id: 3,
+    date: "2026-05-26",
+    channel: "The Feminine Universe",
+    title: "#2 — The 5 Categories Men Put Women Into | How They View You is How They Treat You",
+    views: "709K",
+    comments: "Pending next pass.",
+    gaps: "Framed entirely around male perception. High performance signals the audience is still seeking external validation — exactly the pattern Lala's work addresses at a deeper level."
+  },
+  {
+    id: 4,
+    date: "2026-05-26",
+    channel: "The Feminine Universe",
+    title: "#3 — Become a High Value Feminine Woman — The Total Feminine Package",
+    views: "699K",
+    comments: "Pending next pass.",
+    gaps: "'High value woman' framing is behavior and presentation focused. No internal architecture. No identity work. Comments likely full of women asking what's missing beneath the surface."
+  },
+  {
+    id: 5,
+    date: "2026-05-26",
+    channel: "The Feminine Universe",
+    title: "#4 — How To Be More Attractive — 10 Fast & Easy Tips Part 1",
+    views: "520K",
+    comments: "Pending next pass.",
+    gaps: "Tips-based attractiveness content. Fast and easy framing signals audience wants quick fixes — Lala's content meets them where quick fixes stopped working."
+  },
+  {
+    id: 6,
+    date: "2026-05-26",
+    channel: "The Feminine Universe",
+    title: "#5 — How To Reinvent Yourself | 10 Easy Steps | Start Today",
+    views: "513K",
+    comments: "Pending next pass.",
+    gaps: "Closest to inner territory but still framed as external steps. 'Start Today' urgency + numbered list = no real identity excavation. This is the video whose comment section is most worth mining — women here may be expressing what the steps didn't give them."
+  },
+  {
+    id: 7,
+    date: "2026-05-26",
+    channel: "The Feminine Universe",
+    title: "#6 — The Feminine Journey | Change Your Life in 6 Months | Step-by-Step",
+    views: "401K",
+    comments: "Pending next pass.",
+    gaps: "Step-by-step life change. Still behavioral, not identity-level. 6-month timeline framing is interesting — suggests audience wants a container, not just tips."
+  },
+  {
+    id: 8,
+    date: "2026-05-26",
+    channel: "The Feminine Universe",
+    title: "Recent — If You're a Woman Who Needs Money NOW — Don't Start a Business",
+    views: "33K in 8 days",
+    comments: "Pending next pass.",
+    gaps: "Strongest recent performer. Provocative, practical, direct. No soul depth. Signals audience is also dealing with financial pressure and practical decisions — adjacent to Lala's life design territory."
+  },
+  {
+    id: 9,
+    date: "2026-05-26",
+    channel: "The Feminine Universe",
+    title: "Recent — Why Some Women ALWAYS Win (And It's Not Luck)",
+    views: "6.3K (1 day old)",
+    comments: "Pending next pass.",
+    gaps: "Behavioral framing — winning vs. luck. Watch this one over the next 2 weeks to see if it legs out. Title is strong but still external attribution. Lala's version of this would go to the identity beneath the pattern."
+  }
+];
+function addEntry() {
+  var date = document.getElementById('f-date').value;
+  var channel = document.getElementById('f-channel').value.trim();
+  var title = document.getElementById('f-title').value.trim();
+  var views = document.getElementById('f-views').value.trim();
+  var comments = document.getElementById('f-comments').value.trim();
+  var gaps = document.getElementById('f-gaps').value.trim();
+  if (!channel || !title) return;
+  var entry = { date, channel, title, views, comments, gaps, id: Date.now() };
+  logEntries.unshift(entry);
+  renderLog();
+  document.getElementById('f-channel').value = '';
+  document.getElementById('f-title').value = '';
+  document.getElementById('f-views').value = '';
+  document.getElementById('f-comments').value = '';
+  document.getElementById('f-gaps').value = '';
+}
+document.addEventListener('DOMContentLoaded', function() { renderLog(); });
+function renderLog() {
+  var container = document.getElementById('log-container');
+  var empty = document.getElementById('log-empty');
+  if (logEntries.length === 0) { empty.style.display = 'block'; return; }
+  empty.style.display = 'none';
+  var existing = container.querySelectorAll('.log-entry');
+  existing.forEach(function(e) { e.remove(); });
+  logEntries.forEach(function(e) {
+    var div = document.createElement('div');
+    div.className = 'log-entry';
+    div.innerHTML = '<div class="log-header"><div><span class="log-title">'+e.title+'</span><span class="log-channel">'+e.channel+'</span></div><div class="log-meta">'+e.date+(e.views?' · '+e.views+' views':'')+'</div></div>'
+      + (e.comments ? '<div class="log-section-label">Comments</div><div class="log-section-text">'+e.comments+'</div>' : '')
+      + (e.gaps ? '<div class="log-section-label gold">Gaps Noted</div><div class="log-section-text light">'+e.gaps+'</div>' : '');
+    container.appendChild(div);
+  });
+}
+</script>
+</body>
+</html>
