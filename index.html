@@ -336,31 +336,15 @@
   <!-- THEMES -->
   <div id="tab-themes" class="tab" style="display:none;">
     <p class="intro-text">Content themes ranked by saturation across the adjacent niche. Low saturation + high demand = Lala's highest-leverage territory.</p>
-
-    <script>
-    var themes = [
-      { theme: "Quantum / Timeline Collapse Language", sat: "High", satColor: "#e67e22", sentiment: "Mixed — resonates but also creates confusion and spiritual bypass", opp: "Translate the concept into grounded identity and decision-making language women can actually use" },
-      { theme: "Shadow Work 101", sat: "Very High", satColor: "#c0392b", sentiment: "Strong demand, lots of surface-level content", opp: "Go deeper — shadow work as a business and creative strategy for founders, not just healing" },
-      { theme: "Feminine Energy / Archetypes", sat: "High", satColor: "#e67e22", sentiment: "Lifestyle-level saturation. Archetypal depth is underserved.", opp: "Mythic / initiatory framing of archetypes (Inanna, Atropos, Lilith) is wide open and distinct" },
-      { theme: "Manifestation Techniques", sat: "Extremely High", satColor: "#922b21", sentiment: "Audience fatigue visible in comments — 'I've tried everything'", opp: "Reframe manifestation as identity alignment and decision authority, not technique" },
-      { theme: "Women + Self-Worth + Overthinking", sat: "Moderate", satColor: "#f1c40f", sentiment: "High emotional resonance. Evergreen demand.", opp: "Deep content that names the specific pattern of high-achieving women who still defer to external validation — underserved and precise" },
-      { theme: "Practical Life Design for Women", sat: "Low-Moderate", satColor: "#27ae60", sentiment: "Strong desire. Few channels bridge spiritual identity with practical decision design.", opp: "The Freefeather Framework is exactly this gap — no one is naming it cleanly" },
-      { theme: "Ancestral / Ritual / Initiatory Feminine", sat: "Very Low", satColor: "#1a5276", sentiment: "Hungry niche. Comments in adjacent content often ask 'where can I learn more about this?'", opp: "Myth & Mirror / Fates ecosystem is wide open. Biggest positioning whitespace." }
-    ];
-    document.addEventListener('DOMContentLoaded', function() {
-      var container = document.getElementById('themes-container');
-      themes.forEach(function(t) {
-        container.innerHTML += '<div class="theme-card">'
-          + '<div class="theme-header"><div class="theme-name">'+t.theme+'</div>'
-          + '<span class="sat-badge" style="background:'+t.satColor+'22;border:1px solid '+t.satColor+';color:'+t.satColor+'">'+t.sat+' Saturation</span></div>'
-          + '<div class="two-col">'
-          + '<div><div class="field-label">Comment Sentiment</div><div class="field-text">'+t.sentiment+'</div></div>'
-          + '<div class="opp-box"><div class="opp-label">Your Opportunity</div><div class="opp-text">'+t.opp+'</div></div>'
-          + '</div></div>';
-      });
-    });
-    </script>
-    <div id="themes-container"></div>
+    <div id="themes-container">
+      <div class="theme-card"><div class="theme-header"><div class="theme-name">Quantum / Timeline Collapse Language</div><span class="sat-badge" style="background:#e67e2222;border:1px solid #e67e22;color:#e67e22">High Saturation</span></div><div class="two-col"><div><div class="field-label">Comment Sentiment</div><div class="field-text">Mixed — resonates but also creates confusion and spiritual bypass</div></div><div class="opp-box"><div class="opp-label">Your Opportunity</div><div class="opp-text">Translate the concept into grounded identity and decision-making language women can actually use</div></div></div></div>
+      <div class="theme-card"><div class="theme-header"><div class="theme-name">Shadow Work 101</div><span class="sat-badge" style="background:#c0392b22;border:1px solid #c0392b;color:#c0392b">Very High Saturation</span></div><div class="two-col"><div><div class="field-label">Comment Sentiment</div><div class="field-text">Strong demand, lots of surface-level content</div></div><div class="opp-box"><div class="opp-label">Your Opportunity</div><div class="opp-text">Go deeper — shadow work as a business and creative strategy for founders, not just healing</div></div></div></div>
+      <div class="theme-card"><div class="theme-header"><div class="theme-name">Feminine Energy / Archetypes</div><span class="sat-badge" style="background:#e67e2222;border:1px solid #e67e22;color:#e67e22">High Saturation</span></div><div class="two-col"><div><div class="field-label">Comment Sentiment</div><div class="field-text">Lifestyle-level saturation. Archetypal depth is underserved.</div></div><div class="opp-box"><div class="opp-label">Your Opportunity</div><div class="opp-text">Mythic / initiatory framing of archetypes (Inanna, Atropos, Lilith) is wide open and distinct</div></div></div></div>
+      <div class="theme-card"><div class="theme-header"><div class="theme-name">Manifestation Techniques</div><span class="sat-badge" style="background:#922b2122;border:1px solid #922b21;color:#922b21">Extremely High Saturation</span></div><div class="two-col"><div><div class="field-label">Comment Sentiment</div><div class="field-text">Audience fatigue visible in comments — women saying they have tried everything</div></div><div class="opp-box"><div class="opp-label">Your Opportunity</div><div class="opp-text">Reframe manifestation as identity alignment and decision authority, not technique</div></div></div></div>
+      <div class="theme-card"><div class="theme-header"><div class="theme-name">Women + Self-Worth + Overthinking</div><span class="sat-badge" style="background:#f1c40f22;border:1px solid #f1c40f;color:#f1c40f">Moderate Saturation</span></div><div class="two-col"><div><div class="field-label">Comment Sentiment</div><div class="field-text">High emotional resonance. Evergreen demand.</div></div><div class="opp-box"><div class="opp-label">Your Opportunity</div><div class="opp-text">Deep content that names the specific pattern of high-achieving women who still defer to external validation — underserved and precise</div></div></div></div>
+      <div class="theme-card"><div class="theme-header"><div class="theme-name">Practical Life Design for Women</div><span class="sat-badge" style="background:#27ae6022;border:1px solid #27ae60;color:#27ae60">Low-Moderate Saturation</span></div><div class="two-col"><div><div class="field-label">Comment Sentiment</div><div class="field-text">Strong desire. Few channels bridge spiritual identity with practical decision design.</div></div><div class="opp-box"><div class="opp-label">Your Opportunity</div><div class="opp-text">The Freefeather Framework is exactly this gap — no one is naming it cleanly</div></div></div></div>
+      <div class="theme-card"><div class="theme-header"><div class="theme-name">Ancestral / Ritual / Initiatory Feminine</div><span class="sat-badge" style="background:#1a527622;border:1px solid #1a5276;color:#1a5276">Very Low Saturation</span></div><div class="two-col"><div><div class="field-label">Comment Sentiment</div><div class="field-text">Hungry niche. Comments in adjacent content often ask where can I learn more about this.</div></div><div class="opp-box"><div class="opp-label">Your Opportunity</div><div class="opp-text">Myth and Mirror / Fates ecosystem is wide open. Biggest positioning whitespace.</div></div></div></div>
+    </div>
   </div>
 
   <!-- COMMENTS -->
