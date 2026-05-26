@@ -6,104 +6,104 @@
 <title>Lisa Freefeather — Competitive Research Hub</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: Georgia, 'Times New Roman', serif; background: #0d0d0d; color: #e8e0d4; min-height: 100vh; }
-  a { color: #c9a96e; }
+  body { font-family: Georgia, 'Times New Roman', serif; background: #1c1c1c; color: #f0e8dc; min-height: 100vh; }
+  a { color: #d4a96e; }
 
-  .header { border-bottom: 1px solid #2a2a2a; padding: 36px 48px 28px; background: linear-gradient(180deg, #111 0%, #0d0d0d 100%); }
-  .header-eyebrow { font-size: 10px; letter-spacing: 4px; color: #8a7a6a; text-transform: uppercase; margin-bottom: 10px; }
-  .header-title { font-size: 28px; font-weight: 400; margin: 0 0 6px; letter-spacing: 0.5px; color: #f0e8dc; }
-  .header-sub { font-size: 13px; color: #5a5040; letter-spacing: 1px; }
-  .header-sub2 { font-size: 11px; color: #3a3028; margin-top: 4px; letter-spacing: 1px; }
+  .header { border-bottom: 1px solid #2e2e2e; padding: 36px 48px 28px; background: linear-gradient(180deg, #202020 0%, #1c1c1c 100%); }
+  .header-eyebrow { font-size: 10px; letter-spacing: 4px; color: #9a8a72; text-transform: uppercase; margin-bottom: 10px; }
+  .header-title { font-size: 28px; font-weight: 400; margin: 0 0 6px; letter-spacing: 0.5px; color: #f5ede0; }
+  .header-sub { font-size: 13px; color: #7a6e62; letter-spacing: 1px; }
+  .header-sub2 { font-size: 11px; color: #5a5248; margin-top: 4px; letter-spacing: 1px; }
 
-  .nav { display: flex; border-bottom: 1px solid #1e1e1e; padding: 0 48px; background: #0d0d0d; overflow-x: auto; }
-  .nav-btn { background: none; border: none; border-bottom: 2px solid transparent; color: #5a5040; padding: 16px 24px; cursor: pointer; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; font-family: Georgia, serif; white-space: nowrap; transition: color 0.2s; }
-  .nav-btn.active { border-bottom-color: #c9a96e; color: #c9a96e; }
+  .nav { display: flex; border-bottom: 1px solid #2e2e2e; padding: 0 48px; background: #1c1c1c; overflow-x: auto; }
+  .nav-btn { background: none; border: none; border-bottom: 2px solid transparent; color: #7a6e62; padding: 16px 24px; cursor: pointer; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; font-family: Georgia, serif; white-space: nowrap; transition: color 0.2s; }
+  .nav-btn.active { border-bottom-color: #d4a96e; color: #d4a96e; }
 
   .content { padding: 40px 48px; max-width: 1100px; }
 
-  .intro-text { font-size: 14px; color: #7a6a58; line-height: 1.8; max-width: 680px; margin-bottom: 32px; }
+  .intro-text { font-size: 14px; color: #8a7a6a; line-height: 1.8; max-width: 680px; margin-bottom: 32px; }
 
   /* Cards */
-  .card { border: 1px solid #1e1e1e; margin-bottom: 16px; background: #0a0a0a; transition: background 0.2s; }
-  .card.open { background: #111; }
+  .card { border: 1px solid #2e2e2e; margin-bottom: 16px; background: #202020; transition: background 0.2s; }
+  .card.open { background: #262626; }
   .card-header { padding: 20px 24px; cursor: pointer; display: flex; align-items: center; justify-content: space-between; }
   .card-left { display: flex; align-items: center; gap: 20px; }
-  .tier-badge { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; padding: 3px 10px; border: 1px solid #3a3028; color: #5a5040; white-space: nowrap; }
-  .tier-badge.close { border-color: #c9a96e; color: #c9a96e; }
-  .card-name { font-size: 16px; color: #e8e0d4; }
-  .card-niche { font-size: 11px; color: #5a5040; margin-top: 2px; letter-spacing: 1px; }
+  .tier-badge { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; padding: 3px 10px; border: 1px solid #4a4038; color: #7a6e62; white-space: nowrap; }
+  .tier-badge.close { border-color: #d4a96e; color: #d4a96e; }
+  .card-name { font-size: 16px; color: #f0e8dc; }
+  .card-niche { font-size: 11px; color: #7a6e62; margin-top: 2px; letter-spacing: 1px; }
   .card-right { display: flex; gap: 32px; align-items: center; }
-  .subs-count { font-size: 18px; color: #c9a96e; }
-  .subs-label { font-size: 10px; color: #3a3028; letter-spacing: 1px; }
-  .toggle-icon { color: #3a3028; font-size: 18px; }
-  .card-body { padding: 0 24px 24px; border-top: 1px solid #1a1a1a; display: none; }
+  .subs-count { font-size: 18px; color: #d4a96e; }
+  .subs-label { font-size: 10px; color: #5a5248; letter-spacing: 1px; }
+  .toggle-icon { color: #5a5248; font-size: 18px; }
+  .card-body { padding: 0 24px 24px; border-top: 1px solid #2e2e2e; display: none; }
   .card-body.open { display: block; }
   .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 20px; }
-  .field-label { font-size: 10px; letter-spacing: 2px; color: #5a5040; text-transform: uppercase; margin-bottom: 10px; }
-  .pillar-item { font-size: 13px; color: #9a8a78; padding: 4px 0; border-bottom: 1px solid #1a1a1a; }
-  .field-text { font-size: 13px; color: #9a8a78; line-height: 1.7; }
-  .gap-box { margin-top: 20px; padding: 16px; background: #0d0d0d; border: 1px solid rgba(201,169,110,0.13); }
-  .gap-label { font-size: 10px; letter-spacing: 2px; color: #c9a96e; text-transform: uppercase; margin-bottom: 8px; }
-  .gap-text { font-size: 13px; color: #b8a890; line-height: 1.7; }
+  .field-label { font-size: 10px; letter-spacing: 2px; color: #7a6e62; text-transform: uppercase; margin-bottom: 10px; }
+  .pillar-item { font-size: 13px; color: #b0a090; padding: 4px 0; border-bottom: 1px solid #2e2e2e; }
+  .field-text { font-size: 13px; color: #b0a090; line-height: 1.7; }
+  .gap-box { margin-top: 20px; padding: 16px; background: #1c1c1c; border: 1px solid rgba(212,169,110,0.18); }
+  .gap-label { font-size: 10px; letter-spacing: 2px; color: #d4a96e; text-transform: uppercase; margin-bottom: 8px; }
+  .gap-text { font-size: 13px; color: #c8b8a0; line-height: 1.7; }
 
   /* Themes */
-  .theme-card { margin-bottom: 20px; border: 1px solid #1e1e1e; padding: 24px; }
+  .theme-card { margin-bottom: 20px; border: 1px solid #2e2e2e; padding: 24px; }
   .theme-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; }
-  .theme-name { font-size: 16px; color: #e8e0d4; }
+  .theme-name { font-size: 16px; color: #f0e8dc; }
   .sat-badge { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; padding: 3px 10px; white-space: nowrap; }
   .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .opp-box { padding: 12px; background: #111; border: 1px solid rgba(201,169,110,0.13); }
-  .opp-label { font-size: 10px; letter-spacing: 2px; color: #c9a96e; text-transform: uppercase; margin-bottom: 6px; }
-  .opp-text { font-size: 13px; color: #b8a890; line-height: 1.6; }
+  .opp-box { padding: 12px; background: #262626; border: 1px solid rgba(212,169,110,0.18); }
+  .opp-label { font-size: 10px; letter-spacing: 2px; color: #d4a96e; text-transform: uppercase; margin-bottom: 6px; }
+  .opp-text { font-size: 13px; color: #c8b8a0; line-height: 1.6; }
 
   /* Comments */
-  .comment-card { margin-bottom: 20px; border: 1px solid #1e1e1e; }
-  .comment-source { padding: 14px 24px; background: #0a0a0a; border-bottom: 1px solid #1e1e1e; font-size: 10px; letter-spacing: 2px; color: #5a5040; text-transform: uppercase; }
+  .comment-card { margin-bottom: 20px; border: 1px solid #2e2e2e; }
+  .comment-source { padding: 14px 24px; background: #202020; border-bottom: 1px solid #2e2e2e; font-size: 10px; letter-spacing: 2px; color: #7a6e62; text-transform: uppercase; }
   .comment-body { padding: 20px 24px; }
-  .comment-quote { font-size: 18px; color: #c9a96e; font-style: italic; margin-bottom: 12px; line-height: 1.5; }
+  .comment-quote { font-size: 18px; color: #d4a96e; font-style: italic; margin-bottom: 12px; line-height: 1.5; }
   .signal-row { display: flex; gap: 8px; align-items: flex-start; }
-  .signal-label { font-size: 10px; letter-spacing: 2px; color: #c9a96e; text-transform: uppercase; white-space: nowrap; padding-top: 2px; }
-  .signal-text { font-size: 13px; color: #9a8a78; line-height: 1.7; }
+  .signal-label { font-size: 10px; letter-spacing: 2px; color: #d4a96e; text-transform: uppercase; white-space: nowrap; padding-top: 2px; }
+  .signal-text { font-size: 13px; color: #b0a090; line-height: 1.7; }
 
   /* Tracker */
-  .tracker-form { border: 1px solid #2a2a2a; padding: 28px; margin-bottom: 40px; background: #0a0a0a; }
-  .form-title { font-size: 10px; letter-spacing: 3px; color: #c9a96e; text-transform: uppercase; margin-bottom: 24px; }
+  .tracker-form { border: 1px solid #2e2e2e; padding: 28px; margin-bottom: 40px; background: #202020; }
+  .form-title { font-size: 10px; letter-spacing: 3px; color: #d4a96e; text-transform: uppercase; margin-bottom: 24px; }
   .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
   .form-field { margin-bottom: 16px; }
-  .form-label { font-size: 10px; letter-spacing: 2px; color: #5a5040; text-transform: uppercase; margin-bottom: 6px; display: block; }
-  .form-input, .form-textarea { width: 100%; background: #111; border: 1px solid #2a2a2a; color: #e8e0d4; padding: 10px 12px; font-size: 13px; font-family: Georgia, serif; outline: none; }
+  .form-label { font-size: 10px; letter-spacing: 2px; color: #7a6e62; text-transform: uppercase; margin-bottom: 6px; display: block; }
+  .form-input, .form-textarea { width: 100%; background: #262626; border: 1px solid #2e2e2e; color: #f0e8dc; padding: 10px 12px; font-size: 13px; font-family: Georgia, serif; outline: none; }
   .form-textarea { resize: vertical; }
-  .form-btn { background: none; border: 1px solid #c9a96e; color: #c9a96e; padding: 10px 28px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; font-family: Georgia, serif; margin-top: 8px; }
-  .form-btn:hover { background: rgba(201,169,110,0.08); }
-  .log-empty { text-align: center; padding: 60px 0; color: #3a3028; font-size: 13px; letter-spacing: 1px; }
-  .log-entry { border: 1px solid #1e1e1e; margin-bottom: 16px; padding: 20px 24px; }
+  .form-btn { background: none; border: 1px solid #d4a96e; color: #d4a96e; padding: 10px 28px; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; font-family: Georgia, serif; margin-top: 8px; }
+  .form-btn:hover { background: rgba(212,169,110,0.08); }
+  .log-empty { text-align: center; padding: 60px 0; color: #5a5248; font-size: 13px; letter-spacing: 1px; }
+  .log-entry { border: 1px solid #2e2e2e; margin-bottom: 16px; padding: 20px 24px; }
   .log-header { display: flex; justify-content: space-between; margin-bottom: 12px; }
-  .log-title { font-size: 14px; color: #e8e0d4; }
-  .log-channel { font-size: 11px; color: #5a5040; margin-left: 12px; }
-  .log-meta { font-size: 11px; color: #3a3028; }
-  .log-section-label { font-size: 10px; letter-spacing: 2px; color: #5a5040; text-transform: uppercase; margin-bottom: 4px; }
-  .log-section-label.gold { color: #c9a96e; }
-  .log-section-text { font-size: 13px; color: #9a8a78; font-style: italic; line-height: 1.6; margin-bottom: 10px; }
-  .log-section-text.light { color: #b8a890; font-style: normal; }
+  .log-title { font-size: 14px; color: #f0e8dc; }
+  .log-channel { font-size: 11px; color: #7a6e62; margin-left: 12px; }
+  .log-meta { font-size: 11px; color: #5a5248; }
+  .log-section-label { font-size: 10px; letter-spacing: 2px; color: #7a6e62; text-transform: uppercase; margin-bottom: 4px; }
+  .log-section-label.gold { color: #d4a96e; }
+  .log-section-text { font-size: 13px; color: #b0a090; font-style: italic; line-height: 1.6; margin-bottom: 10px; }
+  .log-section-text.light { color: #c8b8a0; font-style: normal; }
 
   /* Tools */
-  .tool-card { margin-bottom: 24px; border: 1px solid #1e1e1e; }
-  .tool-header { padding: 18px 24px; background: #0a0a0a; border-bottom: 1px solid #1e1e1e; display: flex; justify-content: space-between; align-items: center; }
-  .tool-name { font-size: 16px; color: #e8e0d4; }
-  .tool-type { font-size: 11px; color: #5a5040; margin-left: 14px; letter-spacing: 1px; }
+  .tool-card { margin-bottom: 24px; border: 1px solid #2e2e2e; }
+  .tool-header { padding: 18px 24px; background: #202020; border-bottom: 1px solid #2e2e2e; display: flex; justify-content: space-between; align-items: center; }
+  .tool-name { font-size: 16px; color: #f0e8dc; }
+  .tool-type { font-size: 11px; color: #7a6e62; margin-left: 14px; letter-spacing: 1px; }
   .tool-badge { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; padding: 3px 10px; }
-  .tool-badge.primary { border: 1px solid #c9a96e; color: #c9a96e; }
-  .tool-badge.secondary { border: 1px solid #3a3028; color: #5a5040; }
+  .tool-badge.primary { border: 1px solid #d4a96e; color: #d4a96e; }
+  .tool-badge.secondary { border: 1px solid #4a4038; color: #7a6e62; }
   .tool-body { padding: 20px 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-  .why-box { padding: 14px; background: #111; border: 1px solid rgba(201,169,110,0.13); margin-bottom: 14px; }
-  .why-label { font-size: 10px; letter-spacing: 2px; color: #c9a96e; text-transform: uppercase; margin-bottom: 6px; }
-  .why-text { font-size: 13px; color: #b8a890; line-height: 1.7; }
-  .workflow-box { padding: 14px; background: #0a0a0a; border: 1px solid #2a2a2a; }
-  .workflow-label { font-size: 10px; letter-spacing: 2px; color: #5a5040; text-transform: uppercase; margin-bottom: 6px; }
-  .workflow-text { font-size: 13px; color: #9a8a78; line-height: 1.7; }
-  .tool-link { display: inline-block; margin-top: 12px; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #c9a96e; text-decoration: none; border-bottom: 1px solid rgba(201,169,110,0.27); padding-bottom: 2px; }
+  .why-box { padding: 14px; background: #262626; border: 1px solid rgba(212,169,110,0.18); margin-bottom: 14px; }
+  .why-label { font-size: 10px; letter-spacing: 2px; color: #d4a96e; text-transform: uppercase; margin-bottom: 6px; }
+  .why-text { font-size: 13px; color: #c8b8a0; line-height: 1.7; }
+  .workflow-box { padding: 14px; background: #202020; border: 1px solid #2e2e2e; }
+  .workflow-label { font-size: 10px; letter-spacing: 2px; color: #7a6e62; text-transform: uppercase; margin-bottom: 6px; }
+  .workflow-text { font-size: 13px; color: #b0a090; line-height: 1.7; }
+  .tool-link { display: inline-block; margin-top: 12px; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #d4a96e; text-decoration: none; border-bottom: 1px solid rgba(212,169,110,0.3); padding-bottom: 2px; }
 
-  .note-box { margin-top: 24px; padding: 16px 20px; border: 1px dashed #2a2a2a; font-size: 12px; color: #3a3028; line-height: 1.7; }
+  .note-box { margin-top: 24px; padding: 16px 20px; border: 1px dashed #2e2e2e; font-size: 12px; color: #5a5248; line-height: 1.7; }
 
   @media (max-width: 700px) {
     .header { padding: 24px 20px 18px; }
@@ -129,13 +129,14 @@
   <button class="nav-btn" onclick="showTab('comments', this)">Comment Patterns</button>
   <button class="nav-btn" onclick="showTab('tracker', this)">Biweekly Log</button>
   <button class="nav-btn" onclick="showTab('tools', this)">Research Tools</button>
+  <button class="nav-btn" onclick="showTab('positioning', this)">Positioning Language</button>
 </nav>
 
 <div class="content">
 
   <!-- LANDSCAPE -->
   <div id="tab-landscape" class="tab">
-    <p class="intro-text">Five channels mapped in Wave 1. Tier labels indicate proximity to Lala's positioning. Expand each channel to see the identified gap — where their audience is left hungry.</p>
+    <p class="intro-text">Six channels mapped in Wave 1. Tier labels indicate proximity to Lala's positioning. Expand each channel to see the identified gap — where their audience is left hungry.</p>
 
     <div class="card" id="ch1">
       <div class="card-header" onclick="toggleCard('ch1')">
@@ -291,6 +292,41 @@
           </div>
         </div>
         <div class="gap-box"><div class="gap-label">Identified Gap</div><div class="gap-text">Technique-heavy. Less on the why beneath the pattern — nervous system, identity, ancestral. Watch for women stuck in the loop of trying and not arriving.</div></div>
+      </div>
+    </div>
+
+    <div class="card" id="ch6">
+      <div class="card-header" onclick="toggleCard('ch6')">
+        <div class="card-left">
+          <span class="tier-badge">Adjacent</span>
+          <div><div class="card-name">Brian Scott — The Reality Revolution</div><div class="card-niche">Spiritual Curation / Sleep Meditation / Consciousness</div></div>
+        </div>
+        <div class="card-right">
+          <div><div class="subs-count">830K</div><div class="subs-label">SUBSCRIBERS</div></div>
+          <span class="toggle-icon">+</span>
+        </div>
+      </div>
+      <div class="card-body" id="ch6-body">
+        <div class="card-grid">
+          <div>
+            <div class="field-label">Content Pillars</div>
+            <div class="pillar-item">— Sleep meditations (8 hour format)</div>
+            <div class="pillar-item">— Neville Goddard / Dr. Joseph Murphy / Rumi (curated)</div>
+            <div class="pillar-item">— Quantum jumping / parallel realities</div>
+            <div class="pillar-item">— CIA Gateway Process / holographic reality</div>
+            <div class="pillar-item">— Edgar Cayce / Book of Revelation</div>
+            <div class="pillar-item">— Guided abundance meditations</div>
+            <div class="field-label" style="margin-top:16px;">Tone</div>
+            <div class="field-text">Non-dogmatic, wide-ranging, spirituality without borders. Curator not teacher. Passive consumption model.</div>
+          </div>
+          <div>
+            <div class="field-label">Audience</div>
+            <div class="field-text">830K subscribers. +539K views per week. 8 uploads per week. Avg video 77 minutes. Est. $8.3K/mo. Audience listens while sleeping — passive subconscious programming, not active transformation work. Draws from Neville Goddard, Rumi, Joseph Murphy, Edgar Cayce, CIA research, quantum physics — no single system.</div>
+            <div class="field-label" style="margin-top:16px;">Top Videos</div>
+            <div class="field-text">Sleep meditations dominate top spots. Neville Goddard — The Feeling Is the Secret (1.7M). Deep Sleep Ascending to Higher Dimensions (1.6M). Divine Wisdom of Rumi (1.2M). Quantum Jumping Into Your Dream Life (910K). All 800K+ range for top 15.</div>
+          </div>
+        </div>
+        <div class="gap-box"><div class="gap-label">Identified Gap</div><div class="gap-text">Brian Scott is a spiritual content aggregator, not a teacher. His audience of 830K absorbs cosmic and wisdom content passively — while sleeping — and wakes up in the same life. The gap is enormous: no feminine lens, no ancestral layer, no identity excavation, no embodied application, no community or initiation container. He gives them the frequency. Nobody gives them the transformation. Some of his audience has been listening to sleep meditations for years and is exhausted from passive consumption with no movement. That exhaustion is also Lala's audience entry point. The spirituality-without-borders approach is the quality worth studying — non-dogmatic, draws from everywhere, finds what is true rather than what is correct within a system.</div></div>
       </div>
     </div>
 
@@ -477,6 +513,39 @@
     </div>
   </div>
 
+  <!-- POSITIONING LANGUAGE -->
+  <div id="tab-positioning" class="tab" style="display:none;">
+    <p class="intro-text">Language captured in real time from research conversations. These are not marketing copy — they are precise truths that emerged from naming the gap. Use them as opening lines, channel description copy, sales page anchors, and video hooks.</p>
+
+    <div style="margin-bottom:20px;padding:20px 24px;border:1px solid #1e1e1e;background:#0a0a0a;">
+      <div style="font-size:10px;letter-spacing:2px;color:#c9a96e;text-transform:uppercase;margin-bottom:12px;">On Conditioning and Visibility</div>
+      <div style="font-size:22px;color:#f0e8dc;font-style:italic;line-height:1.6;margin-bottom:16px;">"That invisibility IS the wound."</div>
+      <div style="font-size:14px;color:#9a8a78;line-height:1.7;margin-bottom:16px;">"The conditioning she needs to release is indistinguishable from her identity — it feels like strength. It feels like discipline. It feels like who she is."</div>
+      <div style="font-size:10px;letter-spacing:2px;color:#5a5040;text-transform:uppercase;margin-bottom:6px;">Use In</div>
+      <div style="font-size:13px;color:#7a6a58;">Pillar video opening lines · Channel description · Container sales page · About page</div>
+    </div>
+
+    <div style="margin-bottom:20px;padding:20px 24px;border:1px solid #1e1e1e;background:#0a0a0a;">
+      <div style="font-size:10px;letter-spacing:2px;color:#c9a96e;text-transform:uppercase;margin-bottom:12px;">On Positioning vs. Adjacent Channels</div>
+      <div style="font-size:22px;color:#f0e8dc;font-style:italic;line-height:1.6;margin-bottom:16px;">"She is teaching women to get what they want by managing how they're perceived. Lala is teaching women to know who they are so clearly that perception becomes irrelevant."</div>
+      <div style="font-size:14px;color:#9a8a78;line-height:1.7;margin-bottom:16px;">"Her woman is still playing the game better. Lala's woman has started questioning the game entirely — and doesn't yet have language or a container for what comes next."</div>
+      <div style="font-size:10px;letter-spacing:2px;color:#5a5040;text-transform:uppercase;margin-bottom:6px;">Use In</div>
+      <div style="font-size:13px;color:#7a6a58;">Friction teaser video scripts · Channel positioning copy · Community welcome message</div>
+    </div>
+
+    <div style="margin-bottom:20px;padding:20px 24px;border:1px solid #1e1e1e;background:#0a0a0a;">
+      <div style="font-size:10px;letter-spacing:2px;color:#c9a96e;text-transform:uppercase;margin-bottom:12px;">On Deepening Love and Her Real Wound</div>
+      <div style="font-size:22px;color:#f0e8dc;font-style:italic;line-height:1.6;margin-bottom:16px;">"She spiritualized her resignation. She calls it acceptance. She calls it evolving beyond drama. But she stopped expecting the world to meet her in full — and dressed that wound in wisdom language."</div>
+      <div style="font-size:14px;color:#9a8a78;line-height:1.7;margin-bottom:16px;">She presents with relationship confusion — feeling broken, unlucky, or resigned to the high road. The root issue is that the world feels cosmically unnatural to navigate. Deepening Love is the door. Identity and cosmology is the room.</div>
+      <div style="font-size:10px;letter-spacing:2px;color:#5a5040;text-transform:uppercase;margin-bottom:6px;">Use In</div>
+      <div style="font-size:13px;color:#7a6a58;">Deepening Love video hooks · Relationship content as funnel entry · Container sales page emotional arc</div>
+    </div>
+
+    <div style="margin-top:24px;padding:16px 20px;border:1px dashed #2a2a2a;font-size:12px;color:#3a3028;line-height:1.7;">
+      Add new language captures here as they emerge from research conversations, scripting sessions, and live content. Date each one. These phrases are the seed of your brand voice.
+    </div>
+  </div>
+
 </div>
 
 <script>
@@ -499,7 +568,23 @@ function toggleCard(id) {
 
 var logEntries = [
   {
-    id: 10,
+    id: 16,
+    date: "2026-05-26",
+    channel: "Brian Scott — The Reality Revolution",
+    title: "WAVE 1 — Top 15 Most Popular Videos (Full Channel Audit)",
+    views: "830K subs · +539,131 views last 7 days · est. $8.3K/mo · 77 min avg · ~8 uploads/week · therealityrevolution.com",
+    comments: "Pending — visit top videos, sort comments by Top, paste recurring phrases on next pass. Priority: Neville Goddard Feeling Is The Secret (1.7M) and Divine Wisdom of Rumi (1.2M).",
+    gaps: "Brian Scott is a spiritual content aggregator not a teacher. 830K people absorbing Neville Goddard, Rumi, Joseph Murphy, CIA Gateway Process, Edgar Cayce, quantum jumping — while sleeping. Passive subconscious programming, not active transformation. Non-dogmatic spirituality without borders is the quality worth studying. The gap: no feminine lens, no ancestral layer, no identity excavation, no embodied application, no community or initiation container. He gives them the frequency. Nobody gives them the transformation. Some of his audience has been listening to sleep meditations for years and is exhausted from passive consumption with no movement — that exhaustion is also Lala's entry point."
+  },
+  {
+    id: 17,
+    date: "2026-05-26",
+    channel: "Brian Scott — The Reality Revolution",
+    title: "Top Videos: Neville Goddard Feeling Is Secret (1.7M) · Sleep Ascending Higher Dimensions (1.6M) · Rumi Divine Wisdom (1.2M) · Joseph Murphy Attract Money (997K) · Quantum Jumping Dream Life (910K)",
+    views: "800K–1.7M range across top 15",
+    comments: "Pending next pass.",
+    gaps: "Sleep meditation format dominates. Audience is in passive receive mode. Rumi at 1.2M signals wisdom traditions have massive pull — mythic and archetypal content resonates even in this non-feminine-specific space. Lala's mythic framing (Inanna, Atropos, Lilith) has no competition here and would pull from both Brian Scott's audience and Erin Lyons' audience simultaneously."
+  },
     date: "2026-05-26",
     channel: "Erin Lyons TV",
     title: "WAVE 1 — Top 15 Most Popular Videos (Full Channel Audit)",
